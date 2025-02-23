@@ -19,6 +19,7 @@ def infer_openai_llms(client, model_name, messages, load_phase=False):
 
     chat = client.chat.completions.create(model=model_name,
                                           messages=messages)
+
     if not load_phase:
         reply = format_json_style(chat.choices[0].message.content, [])
 
