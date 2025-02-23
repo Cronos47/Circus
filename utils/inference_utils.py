@@ -8,19 +8,19 @@ def decide_contest_result(score1, score2):
         print("GPT-4 is the WINNER !!")
 
     elif score1 == score2:
-        print("AHH CRAP THIS GAME IS A DRAW!") 
+        print("AHH CRAP THIS GAME IS A DRAW!")
 
     else:
         print("GEMINI is the WINNER!!")
 
 
-def infer_openai_llms(client, model_name, messages, test_mode=False):
+def infer_openai_llms(client, model_name, messages, load_phase=False):
     """Utility to infer on openai models"""
 
     chat = client.chat.completions.create(model=model_name,
                                           messages=messages)
-    
-    if not test_mode:
+
+    if not load_phase:
         reply = format_json_style(chat.choices[0].message.content, [])
 
     else:
@@ -33,7 +33,7 @@ def infer_openai_llms(client, model_name, messages, test_mode=False):
 def infer_hf_transformers(text_generator, messages):
     """Utility to infer on huggingface transformers"""
 
-    output = text_generator(format_message_to_whole_strings(messages), 
+    output = text_generator(format_message_to_whole_strings(messages),
                             max_length=500,
                             temperature=0.7,
                             truncation=True)

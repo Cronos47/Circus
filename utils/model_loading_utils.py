@@ -39,7 +39,8 @@ def load_deepseek(model_name, system_prompt):
 
     # Use FP16 instead of FP8 to avoid the GPU-only issue
     model = AutoModelForCausalLM.from_pretrained(model_name,
-                                                torch_dtype=torch.float16 if device == "cuda" else torch.float32,
+                                                torch_dtype=(torch.float16 if device == "cuda"
+                                                             else torch.float32),
                                                 device_map="auto") # Automatically maps to CPU or GPU
     # Set up text generation pipeline
     text_generator = pipeline("text-generation",
