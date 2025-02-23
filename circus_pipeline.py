@@ -22,7 +22,7 @@ def begin_circus(system_prompts, rounds):
 
     toss_and_pass = np.random.randint(2, size=1)[0]
     initial_prompt_part = "Let the rap battle begin! Whats your reply?"
-    judge_prompt = "What would you rate these two raps out of 1 to 10? Return only the score\
+    judge_prompt = "What would you rate these two raps out of 1 to 10? Return only the scores\
                     delimited by a comma and nothing else.\n"
 
     gpt_message = gemini_message = initial_prompt_part
@@ -70,10 +70,10 @@ def begin_circus(system_prompts, rounds):
         rap_segments = judge_prompt + "Rap1: " + gpt_reply + "\nRap2: " + gemini_reply
 
         print("ROUND : ", round_id + 1)
-        print("Rap1 : ", gpt_reply)
-        print()
-        print("Rap2 : ", gemini_reply)
-        print()
+        # print("GPT RAP : ", gpt_reply)
+        # print()
+        # print("GEMINI RAP : ", gemini_reply)
+        # print()
 
         system_prompts[2] = format_message_to_role_mapper(system_prompts[2],
                                                           role="user",
@@ -85,9 +85,9 @@ def begin_circus(system_prompts, rounds):
         score_gpt += int(scores.split(",")[0])
         score_gemini += int(scores.split(",")[1])
 
-        print("Score GPT-4 : ", int(scores.split(",")[0]), "| "
-              "Score GEMINI : ", int(scores.split(",")[1]))
-        print()
+        # print("Score GPT-4 : ", int(scores.split(",")[0]), "| "
+        #       "Score GEMINI : ", int(scores.split(",")[1]))
+        # print()
 
     print("FINAL SCORE GEMINI : ", score_gemini)
     print("FINAL SCORE GPT-4 : ", score_gpt)
@@ -96,13 +96,15 @@ def begin_circus(system_prompts, rounds):
 
 #### Begin circus ####
 #pylint: disable=invalid-name
-battle_rounds = 5
+battle_rounds = 10
 
 contestant_activation_content = "You are an intelligent assistant who can rap. \
                                 Generate only the rap, in a json format\
                                 where there will be a single key named 'system' \
-                                and the value will be the rap itself. Reply with only yes or no \
-                                if you understood your role."
+                                and the value will be the rap itself and \
+                                before returning the json make sure the json is well-formatted and \
+                                can be read in python without error. \
+                                Reply with only yes or no if you understood your role."
 
 judge_activation_content = "You are an intelligent assistant \
                             who can efficiently judge a rap and \
