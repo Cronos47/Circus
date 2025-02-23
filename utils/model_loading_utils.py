@@ -5,7 +5,7 @@ from openai import OpenAI
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
-from text_processing_utils import format_message_to_whole_strings
+from .text_processing_utils import format_message_to_whole_strings
 
 
 def load_gpt(api_key, model_name,  system_prompt):

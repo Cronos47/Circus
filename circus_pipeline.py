@@ -61,8 +61,10 @@ def begin_circus(system_prompts, rounds):
             deepseek_reply = deepseek(format_message_to_whole_strings(system_prompts[1]), 
                                        max_length=500,
                                        temperature=0.7)[0]["generated_text"]
+
             deepseek_reply = format_json_style(deepseek_reply, [])
-            formatted_deepseek_reply = "This is what your rival had to say\n" + f"GPT : {deepseek_reply}"
+            formatted_deepseek_reply = "This is what your rival had to say\n" +\
+                                        f"GPT : {deepseek_reply}"
 
             system_prompts[1] = format_message_to_role_mapper(system_prompts[1], 
                                                               role="system",
@@ -111,3 +113,8 @@ judge_activation_content = "You are an intelligent assistant \
 gpt_system_prompt = [{"role" : "system", "content" : contestant_activation_content}]
 deepseek_system_prompt = [{"role" : "system", "content" : contestant_activation_content}]
 judge_system_prompt = [{"role" : "system", "content" : judge_activation_content}]
+
+begin_circus(system_prompts=[gpt_system_prompt,
+                             deepseek_system_prompt,
+                             judge_system_prompt],
+            rounds=battle_rounds)
