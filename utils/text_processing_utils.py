@@ -4,6 +4,17 @@ import json
 def format_json_style(response_text, prev_messages):
     """Utility to format deepseek response in json format"""
 
+    if "{" not in response_text:
+        if '"system":' not in response_text:
+            response_text = '{"system": ' + response_text
+
+        else:
+            index = response_text.index('"system":')
+            response_text = "{" + response_text[index:]
+
+    if "}" not in response_text:
+        response_text = response_text + "}"
+
     json_start = response_text.find('{')
     json_end = response_text.rfind('}') + 1
     json_str = response_text[json_start:json_end]
@@ -11,7 +22,7 @@ def format_json_style(response_text, prev_messages):
 
     if len(prev_messages) != 0:
         prev_messages.append(parsed_json)
-        return prev_messages
+        return prev_messages.copy()
 
     else:
         return parsed_json["system"]
