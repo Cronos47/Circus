@@ -16,7 +16,7 @@ def begin_circus(system_prompts, rounds):
                                       system_prompts[0])
 
     gemini, system_prompts[1] = load_google_gemini(os.getenv("OPENROUTER_KEY"),
-                                                   ModelNameConst.GEMINI_MODEL_NAME,
+                                                   ModelNameConst.MISTRAL_MODEL_NAME,
                                                    system_prompts[1])
 
     judge, system_prompts[2] = load_gpt(os.getenv("OPENAI_API_KEY"),
@@ -46,7 +46,7 @@ def begin_circus(system_prompts, rounds):
                                                               text=formatted_gpt_reply)
 
             gemini, system_prompts[1] = infer_openai_llms(gemini,
-                                                          ModelNameConst.GEMINI_MODEL_NAME,
+                                                          ModelNameConst.MISTRAL_MODEL_NAME,
                                                           system_prompts[1])
 
             gemini_reply = system_prompts[1][-1]["content"]
@@ -58,7 +58,7 @@ def begin_circus(system_prompts, rounds):
                                                               text=gemini_message)
 
             gemini, system_prompts[1] = infer_openai_llms(gemini,
-                                                          ModelNameConst.GEMINI_MODEL_NAME,
+                                                          ModelNameConst.MISTRAL_MODEL_NAME,
                                                           system_prompts[1])
             gemini_reply = system_prompts[1][-1]["content"]
 
@@ -105,10 +105,10 @@ def begin_circus(system_prompts, rounds):
 
 #pylint: disable=invalid-name
 gpt_system_prompt = [{"role" : "system", "content" : PromptConst.CONTESTANT_ACTIVATION_PROMPT}]
-deepseek_system_prompt = [{"role" : "system", "content" : PromptConst.CONTESTANT_ACTIVATION_PROMPT}]
+gemini_system_prompt = [{"role" : "system", "content" : PromptConst.CONTESTANT_ACTIVATION_PROMPT}]
 judge_system_prompt = [{"role" : "system", "content" : PromptConst.JUDGE_ACTIVATION_PROMPT}]
 
 begin_circus(system_prompts=[gpt_system_prompt,
-                             deepseek_system_prompt,
+                             gemini_system_prompt,
                              judge_system_prompt],
             rounds=CompetitionConst.BATTLE_ROUNDS)

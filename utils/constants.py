@@ -4,7 +4,7 @@ class ModelNameConst:
     DEEPSEEK_MODEL_NAME = "deepseek-ai/deepseek-llm-67b-chat"
     DEEPSEEK_OPENAI_NAME = "deepseek/deepseek-r1-distill-llama-70b:free"
     LLAMA_MODEL_NAME = "meta-llama/Llama-2-7b-chat-hf"
-    GEMINI_MODEL_NAME = "google/gemini-2.0-flash-lite-preview-02-05:free"
+    GEMINI_MODEL_NAME = "google/gemini-2.0-flash-lite-preview-02-05"
     MISTRAL_MODEL_NAME = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     GPT_MODEL_NAME = "gpt-4o-mini"
 
