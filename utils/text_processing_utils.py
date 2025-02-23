@@ -4,9 +4,6 @@ import json
 def format_json_style(response_text, prev_messages):
     """Utility to format deepseek response in json format"""
 
-    print(response_text)
-    print()
-
     if "{" not in response_text:
         if '"system":' not in response_text:
             response_text = '{"system": ' + response_text

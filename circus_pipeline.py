@@ -70,10 +70,10 @@ def begin_circus(system_prompts, rounds):
         rap_segments = judge_prompt + "Rap1: " + gpt_reply + "\nRap2: " + gemini_reply
 
         print("ROUND : ", round_id + 1)
-        # print("GPT RAP : ", gpt_reply)
-        # print()
-        # print("GEMINI RAP : ", gemini_reply)
-        # print()
+        print("GPT RAP : ", gpt_reply)
+        print()
+        print("GEMINI RAP : ", gemini_reply)
+        print()
 
         system_prompts[2] = format_message_to_role_mapper(system_prompts[2],
                                                           role="user",
@@ -85,9 +85,9 @@ def begin_circus(system_prompts, rounds):
         score_gpt += int(scores.split(",")[0])
         score_gemini += int(scores.split(",")[1])
 
-        # print("Score GPT-4 : ", int(scores.split(",")[0]), "| "
-        #       "Score GEMINI : ", int(scores.split(",")[1]))
-        # print()
+        print("Score GPT-4 : ", int(scores.split(",")[0]), "| "
+              "Score GEMINI : ", int(scores.split(",")[1]))
+        print()
 
     print("FINAL SCORE GEMINI : ", score_gemini)
     print("FINAL SCORE GPT-4 : ", score_gpt)
