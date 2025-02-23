@@ -2,6 +2,8 @@ from .text_processing_utils import format_message_to_whole_strings, format_json_
 
 
 def decide_contest_result(score1, score2):
+    """Utility to decide the winner of the battle based on scores obtained"""
+
     if score1 > score2:
         print("GPT-4 is the WINNER !!")
 
