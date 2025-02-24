@@ -42,8 +42,7 @@ def fix_faulty_json_string(response_text):
         sub_text = " ".join([word for word in response_text.split(":")[1].split(" ")
                                                                       if len(word) > 0])
 
-        sub_text = " ".join([word.replace('"', "'")
-                             if ((0 < idx < len(sub_text.split(" ")) - 3) and '"' in word) else word
+        sub_text = " ".join([word.replace('"', "'") if ((0 < idx < len(sub_text.split(" ")) - 3) and '"' in word) else word
                              for idx, word in enumerate(sub_text.split(" "))])
 
         response_text = response_text.split(":")[0] + ":" + sub_text
@@ -55,9 +54,16 @@ def format_json_style(response_text, prev_messages):
 
     response_text = fix_faulty_json_string(response_text)
 
+    print(response_text)
+    print()
+
     json_start = response_text.find('{')
     json_end = response_text.rfind('}') + 1
     json_str = response_text[json_start:json_end]
+
+    print(json_str)
+    print()
+    print(repair_json(str(json_str)))
 
     parsed_json = json.loads(repair_json(str(json_str)))
 
