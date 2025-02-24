@@ -23,10 +23,12 @@ class PromptConst:
                                     The json will have a single key named "system" and the value will be the rap itself \
                                     so the structure will be as follows {"system": "<the rap lines>"}. \
                                     Always make sure to keep the entire rap within double quotes \
-                                    but dont use double quotes inside any of the rap lines and for line breaks use the "|" character,\
-                                    also do not use any escape characters, no backslash character neither any newline character. \
-                                    And before returning the json make sure that \
-                                    the json is correctly formatted in such a way \
+                                    and please do not use any double quotes (" ") inside any of the rap lines \
+                                    if you have to highlight something then use only single quotes (' ') for that.\
+                                    and for line breaks use the "|" character,\
+                                    also do not use any escape characters, no backslash character neither any newline character and \
+                                    please make sure not to repeat the same rap ever. \
+                                    And before returning the json make sure that the json is correctly formatted in such a way \
                                     that it can be read by pythons json.loads() method without errors. \
                                     Also keep in mind that you cannot copy off of your opponent.\
                                     Reply with only yes or no if you understood your role.'
@@ -38,11 +40,11 @@ class PromptConst:
                                 assign the score to the raps based on \
                                 the length of the rap, the rhythm of the rap, \
                                 the roast level of the rap and the relevence of the rap."
-    
+
     PROVOCATION_PROMPT = "This is what your rival had to say\n"
 
 
 class CompetitionConst:
     """Class structure for globally relevant compeition constants"""
 
-    BATTLE_ROUNDS = 10
+    BATTLE_ROUNDS = 15
