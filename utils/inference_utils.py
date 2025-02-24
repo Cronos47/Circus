@@ -19,7 +19,6 @@ def infer_openai_llms(client, model_name, messages, load_phase=False):
 
     chat = client.chat.completions.create(model=model_name,
                                           messages=messages)
-
     if not load_phase:
         reply = format_json_style(chat.choices[0].message.content, [])
 
@@ -27,7 +26,7 @@ def infer_openai_llms(client, model_name, messages, load_phase=False):
         reply = chat.choices[0].message.content
 
     messages.append({"role" : "system", "content" : reply})
-    return client, messages
+    return client, messages.copy()
 
 
 def infer_hf_transformers(text_generator, messages):
@@ -40,4 +39,4 @@ def infer_hf_transformers(text_generator, messages):
 
     reply = output[0]['generated_text']
     messages.append({"role" : "system", "content" : reply})
-    return text_generator, messages
+    return text_generator, messages.copy()

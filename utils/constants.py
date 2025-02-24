@@ -4,7 +4,8 @@ class ModelNameConst:
     DEEPSEEK_MODEL_NAME = "deepseek-ai/deepseek-llm-67b-chat"
     DEEPSEEK_OPENAI_NAME = "deepseek/deepseek-r1-distill-llama-70b:free"
     LLAMA_MODEL_NAME = "meta-llama/Llama-2-7b-chat-hf"
-    GEMINI_MODEL_NAME = "google/gemini-2.0-flash-lite-preview-02-05"
+    GEMINI_MODEL_NAME = "google/gemini-2.0-flash-lite-preview-02-05:free"
+    GEMINI_PAID_MODEL_NAME = "google/gemini-2.0-flash-001"
     MISTRAL_MODEL_NAME = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     GPT_MODEL_NAME = "gpt-4o-mini"
 
@@ -17,14 +18,18 @@ class PromptConst:
     JUDGE_PROMPT = "What would you rate these two raps out of 1 to 10? Return only the scores\
                     delimited by a comma and nothing else.\n"
 
-    CONTESTANT_ACTIVATION_PROMPT = "You are an intelligent assistant who can rap. \
-                                    Generate only the rap, in a json format\
-                                    where there will be a single key named 'system' \
-                                    and the value will be the rap itself and \
-                                    before returning the json make sure \
-                                    the json is well-formatted and \
-                                    can be read in python without error. \
-                                    Reply with only yes or no if you understood your role."
+    CONTESTANT_ACTIVATION_PROMPT = 'You are an intelligent assistant who can rap. \
+                                    Generate only a json containing the rap and nothing else.\
+                                    The json will have a single key named "system" and the value will be the rap itself \
+                                    so the structure will be as follows {"system": "<the rap lines>"}. \
+                                    Always make sure to keep the entire rap within double quotes \
+                                    but dont use double quotes inside any of the rap lines and for line breaks use the "|" character,\
+                                    also do not use any escape characters, no backslash character neither any newline character. \
+                                    And before returning the json make sure that \
+                                    the json is correctly formatted in such a way \
+                                    that it can be read by pythons json.loads() method without errors. \
+                                    Also keep in mind that you cannot copy off of your opponent.\
+                                    Reply with only yes or no if you understood your role.'
 
     JUDGE_ACTIVATION_PROMPT = "You are an intelligent assistant \
                                 who can efficiently judge a rap and \
