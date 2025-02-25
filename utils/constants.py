@@ -8,6 +8,7 @@ class ModelNameConst:
     GEMINI_PAID_MODEL_NAME = "google/gemini-2.0-flash-001"
     MISTRAL_MODEL_NAME = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     GPT_MODEL_NAME = "gpt-4o-mini"
+    UPGRADED_GPT_MODEL_NAME = "gpt-4o"
 
 
 class PromptConst:
@@ -33,13 +34,26 @@ class PromptConst:
                                     Also keep in mind that you cannot copy off of your opponent.\
                                     Reply with only yes or no if you understood your role.'
 
-    JUDGE_ACTIVATION_PROMPT = "You are an intelligent assistant \
-                                who can efficiently judge a rap and \
-                                a score of 1 to 10 to a rap song. \
-                                You have to be absolutely unbiased and \
-                                assign the score to the raps based on \
-                                the length of the rap, the rhythm of the rap, \
-                                the roast level of the rap and the relevence of the rap."
+    JUDGE_ACTIVATION_PROMPT = "You are a rap battle judge. You will score two rap songs out of 1 to 10\
+                               based on the following criteria: \
+                               1. **Length** – Consider the number of lines and overall detail. Longer and more detailed raps score higher. \
+                               2. **Roasting Level** – Evaluate the creativity and intensity of the disses. The more clever and brutal, the higher the score.\
+                               3. **Meaningful Depth** – Consider how insightful, clever, or thought-provoking the lyrics are. \
+                               Each rap will receive a score from **1 to 10** for each criterion. \
+                               Calculate an **average score** for each rap based on the three factors.\
+                                **Rules for Scoring:** \
+                                - **Be objective** based on the given criteria.\
+                                - **Return ONLY the final scores** as **`score1,score2`**.  \
+                                - **No extra commentary, explanations, or text.** \
+                                ### Example:\
+                                **Rap 1:**  \
+                                'I'm the king of the throne, never leaving my zone,  \
+                                Your bars are weak, man, I shatter your tone.'\
+                                **Rap 2:**  \
+                                'Your flow's outdated, stuck in the past,  \
+                                I'm futuristic, spitting rhymes that last.' \
+                                **Output:**  \
+                                8,7"
 
     PROVOCATION_PROMPT = "This is what your rival had to say\n"
 
