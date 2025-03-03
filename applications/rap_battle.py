@@ -37,7 +37,9 @@ if __name__ == "__main__":
 
     candidate_df = pd.DataFrame({"first_contestant" : [first_contestant],
                                  "second_contestant" : [second_contestant],
-                                 "judge" : [competition_judge]})
+                                 "judge" : [competition_judge],
+                                 "provocation_prompt": [RapPromptConst.PROVOCATION_PROMPT],
+                                 "scoring_prompt": [RapPromptConst.JUDGE_PROMPT]})
 
     candidate_df.to_csv(PathConst.BATTLE_CANDIATES)
 

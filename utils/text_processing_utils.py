@@ -39,14 +39,9 @@ def fix_faulty_json_string(response_text):
         response_text = response_text.split("}")[0] + '"' + "}"
 
     if response_text.count('"') > 4:
-        sub_text = " ".join([word for word in response_text.split(":")[1].split(" ")
-                                                                      if len(word) > 0])
-
-        sub_text = " ".join([word.replace('"', "'")
-                             if ((0 < idx < len(sub_text.split(" ")) - 3) and '"' in word) else word
-                             for idx, word in enumerate(sub_text.split(" "))])
-
-        response_text = response_text.split(":")[0] + ":" + sub_text
+        sub_segment = ' '.join(response_text.split(":")[1].split('"'))
+        sub_segment = '"' + sub_segment[:sub_segment.find("}")] + '"' + "}"
+        response_text = response_text.split(":")[0] + sub_segment
     return response_text
 
 
@@ -54,7 +49,6 @@ def format_json_style(response_text, prev_messages):
     """Utility to format deepseek response in json format"""
 
     response_text = fix_faulty_json_string(response_text)
-
     json_start = response_text.find('{')
     json_end = response_text.rfind('}') + 1
     json_str = response_text[json_start:json_end]

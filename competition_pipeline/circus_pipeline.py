@@ -6,7 +6,7 @@ import pandas as pd
 from utils.model_loading_utils import load_gpt, load_google_gemini
 from utils.text_processing_utils import format_message_to_role_mapper
 from utils.inference_utils import infer_openai_llms
-from utils.constants import RapPromptConst, PathConst
+from utils.constants import PathConst
 
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -18,6 +18,8 @@ def begin_circus(system_prompts, round_id, toss_winner, llm_replies):
     first_contestant = candidates_df["first_contestant"].values[0]
     second_contestant = candidates_df["second_contestant"].values[0]
     competition_judge = candidates_df["judge"].values[0]
+    provocation_prompt = candidates_df["provocation_prompt"].values[0]
+    scoring_prompt = candidates_df["scoring_prompt"].values[0]
 
     gpt, system_prompts[0] = load_gpt(os.getenv("OPENAI_API_KEY"),
                                       first_contestant,
@@ -43,8 +45,7 @@ def begin_circus(system_prompts, round_id, toss_winner, llm_replies):
                                                     system_prompts[0])
 
         gpt_reply = "\n".join(system_prompts[0][-1]["content"].split("|"))
-        formatted_gpt_reply = RapPromptConst.PROVOCATION_PROMPT + \
-                              f"GPT : {gpt_reply}"
+        formatted_gpt_reply = provocation_prompt + f"GPT : {gpt_reply}"
 
         system_prompts[1] = format_message_to_role_mapper(system_prompts[1],
                                                           role="user",
@@ -54,7 +55,7 @@ def begin_circus(system_prompts, round_id, toss_winner, llm_replies):
                                                       system_prompts[1])
 
         gemini_reply = "\n".join(system_prompts[1][-1]["content"].split("|"))
-        gpt_message = RapPromptConst.PROVOCATION_PROMPT + gemini_reply
+        gpt_message = provocation_prompt +  f"Gemini : {gemini_reply}"
 
     else:
         system_prompts[1] = format_message_to_role_mapper(system_prompts[1],
@@ -65,8 +66,7 @@ def begin_circus(system_prompts, round_id, toss_winner, llm_replies):
                                                       system_prompts[1])
 
         gemini_reply = "\n".join(system_prompts[1][-1]["content"].split("|"))
-        formatted_gemini_reply = RapPromptConst.PROVOCATION_PROMPT + \
-                                 f"Gemini : {gemini_reply}"
+        formatted_gemini_reply = provocation_prompt + f"Gemini : {gemini_reply}"
 
         system_prompts[0] = format_message_to_role_mapper(system_prompts[0],
                                                           role="user",
@@ -76,9 +76,9 @@ def begin_circus(system_prompts, round_id, toss_winner, llm_replies):
                                                     system_prompts[0])
 
         gpt_reply = "\n".join(system_prompts[0][-1]["content"].split("|"))
-        gemini_message = RapPromptConst.PROVOCATION_PROMPT + gpt_reply
+        gemini_message = provocation_prompt + f"GPT : {gpt_reply}"
 
-    rap_segments = RapPromptConst.JUDGE_PROMPT + "Rap1: " + gpt_reply + "\nRap2: " + gemini_reply
+    rap_segments = scoring_prompt + "Content-1: " + gpt_reply + "\nContent-2: " + gemini_reply
 
     print("ROUND : ", round_id + 1)
     print("GPT REPLY : ", gpt_reply)

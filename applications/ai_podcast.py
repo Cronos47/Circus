@@ -6,7 +6,7 @@ import pandas as pd
 
 from utils.text_processing_utils import format_prompt
 from utils.inference_utils import decide_contest_result
-from utils.constants import ModelNameConst, DebatePromptConst
+from utils.constants import ModelNameConst, PodcastPromptConst
 from utils.constants import CompetitionConst, PathConst
 
 from competition_pipeline.circus_pipeline import begin_circus
@@ -19,13 +19,13 @@ if __name__ == "__main__":
 
     #pylint: disable=invalid-name
     gpt_system_prompt = [{"role" : "system",
-                        "content" : format_prompt(DebatePromptConst.CONTESTANT_ACTIVATION_PROMPT)}]
+                        "content" : format_prompt(PodcastPromptConst.CONTESTANT_ACTIVATION_PROMPT)}]
 
     gemini_system_prompt = [{"role" : "system",
-                            "content" : format_prompt(DebatePromptConst.CONTESTANT_ACTIVATION_PROMPT)}]
+                            "content" : format_prompt(PodcastPromptConst.CONTESTANT_ACTIVATION_PROMPT)}]
 
     judge_system_prompt = [{"role" : "system",
-                            "content" : format_prompt(DebatePromptConst.JUDGE_ACTIVATION_PROMPT)}]
+                            "content" : format_prompt(PodcastPromptConst.JUDGE_ACTIVATION_PROMPT)}]
 
     input_prompts = [gpt_system_prompt,
                     gemini_system_prompt,
@@ -38,24 +38,24 @@ if __name__ == "__main__":
     candidate_df = pd.DataFrame({"first_contestant" : [first_contestant],
                                  "second_contestant" : [second_contestant],
                                  "judge" : [competition_judge],
-                                 "provocation_prompt": [DebatePromptConst.PROVOCATION_PROMPT],
-                                 "scoring_prompt": [DebatePromptConst.JUDGE_PROMPT]})
+                                 "provocation_prompt": [PodcastPromptConst.PROVOCATION_PROMPT],
+                                 "scoring_prompt": [PodcastPromptConst.JUDGE_PROMPT]})
 
     candidate_df.to_csv(PathConst.BATTLE_CANDIATES)
 
-    gpt_output = gemini_output = DebatePromptConst.USER_PROMPT + \
-                                 " " + DebatePromptConst.INITIAL_PROMPT_PART
+    gpt_output = gemini_output = PodcastPromptConst.USER_PROMPT + \
+                                 " " + PodcastPromptConst.INITIAL_PROMPT_PART
 
     acc_score_gpt = acc_score_gemini = 0
     toss_and_pass = np.random.randint(2, size=1)[0]
 
     if toss_and_pass == 0:
-        gpt_output = gpt_output + " " + DebatePromptConst.POSITIVE_SIDE_PROMPT
-        gemini_output = gemini_output + " " + DebatePromptConst.NEGATIVE_SIDE_PROMPT
+        gpt_output = gpt_output + " " + PodcastPromptConst.POSITIVE_SIDE_PROMPT
+        gemini_output = gemini_output + " " + PodcastPromptConst.NEGATIVE_SIDE_PROMPT
 
     else:
-        gpt_output = gpt_output + " " + DebatePromptConst.NEGATIVE_SIDE_PROMPT
-        gemini_output = gemini_output + " " + DebatePromptConst.POSITIVE_SIDE_PROMPT
+        gpt_output = gpt_output + " " + PodcastPromptConst.NEGATIVE_SIDE_PROMPT
+        gemini_output = gemini_output + " " + PodcastPromptConst.POSITIVE_SIDE_PROMPT
 
     for round_idx in range(CompetitionConst.BATTLE_ROUNDS):
         response, input_prompts = begin_circus(system_prompts=input_prompts,
