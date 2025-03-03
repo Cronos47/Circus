@@ -41,7 +41,7 @@ def fix_faulty_json_string(response_text):
     if response_text.count('"') > 4:
         sub_segment = ' '.join(response_text.split(":")[1].split('"'))
         sub_segment = '"' + sub_segment[:sub_segment.find("}")] + '"' + "}"
-        response_text = response_text.split(":")[0] + sub_segment
+        response_text = response_text.split(":")[0] + ": " + sub_segment
     return response_text
 
 

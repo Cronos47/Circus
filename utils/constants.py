@@ -158,10 +158,16 @@ class PodcastPromptConst:
                                     if you have to highlight something then use only double asterisk (* *) for that.\
                                     and for line breaks use the "|" character,\
                                     also do not use any escape characters, no backslash character neither any newline character and \
-                                    please make sure not to repeat the same reply ever. \
+                                    please make sure not to repeat the same reply ever, \
+                                    you are allowed to say anything else which is relevant to avoid repeating same answer. \
                                     And before returning the json make sure that the json is correctly formatted in such a way \
                                     that it can be read by pythons json.loads() method without errors. \
-                                    Also keep in mind that you cannot copy off of your opponent.\
+                                    Always remember to maintain the proper json format, make no mistake in that. \
+                                    Before returning the json verify if you have put a double quotes (" ") inside any debating statements, \
+                                    make sure to replace them with double asterisk (* *).\
+                                    A complete example of which format you should return the entire debating statement would be exactly this, \
+                                    {"system": "This is a sample statement. This is *another* sample statement."}\
+                                    Also keep in mind that you cannot copy off of your opponent or even the user.\
                                     Reply with only yes or no if you understood your role.'
 
     JUDGE_ACTIVATION_PROMPT = "You are a highly objective **AI podcast judge**. \
