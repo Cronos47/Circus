@@ -200,7 +200,7 @@ class PodcastPromptConst:
                                 **Output:**  \
                                 8,9"
 
-    PROVOCATION_PROMPT = "This is what your podcast interviewer had to say\n"
+    PROVOCATION_PROMPT = "This is what your podcast interlocutor had to say\n"
     POSITIVE_SIDE_PROMPT = "You have to ask the question to your podcast guest."
     NEGATIVE_SIDE_PROMPT = "You have to answer the question that your podcast interviewer will ask you."
 
