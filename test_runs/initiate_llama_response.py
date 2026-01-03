@@ -4,7 +4,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 
-MODEL_NAME = "meta-llama/Llama-2-7b-chat-hf"
+MODEL_NAME = "meta-llama/Llama-2-70b-chat-hf"
 hf_token = os.getenv("HUGGING_FACE_TOKEN")
 
 # Load tokenizer

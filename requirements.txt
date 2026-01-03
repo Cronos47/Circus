@@ -1,0 +1,9 @@
+numpy
+pandas
+openai
+huggingface
+huggingface-hub
+torch
+tensorflow
+fix-busted-json
+transformers
